@@ -58,7 +58,7 @@ module.exports = appInfo => {
 
   // add your user config here
   const userConfig = {
-    componentsRoot: 'E:/nginx/html',
+    componentsRoot: '/opt/components',
   };
 
   return {

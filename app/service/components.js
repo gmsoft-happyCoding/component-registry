@@ -8,8 +8,8 @@ class ProjectsService extends Service {
   /**
    * @return {string} - 组件发布的根目录
    */
-  getRegistryRoot() {
-    return path.normalize(this.ctx.app.config.registryRoot);
+  getComponentsRoot() {
+    return path.normalize(this.ctx.app.config.componentsRoot);
   }
 
   /**
@@ -21,7 +21,7 @@ class ProjectsService extends Service {
   async getUrl({ projectName, componentName }) {
     try {
       const components = await fsExtra.readJson(
-        path.join(this.getRegistryRoot(), projectName, 'asset-manifest.json')
+        path.join(this.getComponentsRoot(), projectName, 'asset-manifest.json')
       );
       return components[`${componentName}.js`];
     } catch (e) {
@@ -38,7 +38,7 @@ class ProjectsService extends Service {
   async getMeta({ projectName, componentName }) {
     try {
       const meta = await fsExtra.readJson(
-        path.join(this.getRegistryRoot(), projectName, 'meta', `${componentName}.json`)
+        path.join(this.getComponentsRoot(), projectName, 'meta', `${componentName}.json`)
       );
       return meta;
     } catch (e) {

@@ -8,8 +8,8 @@ class ProjectsService extends Service {
   /**
    * @return {string} - 组件发布的根目录
    */
-  getRegistryRoot() {
-    return path.normalize(this.ctx.app.config.registryRoot);
+  getComponentsRoot() {
+    return path.normalize(this.ctx.app.config.componentsRoot);
   }
 
   /**
@@ -17,8 +17,8 @@ class ProjectsService extends Service {
    * @param {string} projectName - 项目名称
    */
   async projectIsExist(projectName) {
-    const registryRoot = this.getRegistryRoot();
-    const project = path.join(registryRoot, projectName);
+    const componentsRoot = this.getComponentsRoot();
+    const project = path.join(componentsRoot, projectName);
     try {
       const projectStat = await fs.stat(project);
       return projectStat && projectStat.isDirectory();
@@ -33,8 +33,8 @@ class ProjectsService extends Service {
    * @param {boolean} getComponentInfo - 是否获取项目组件数量
    */
   async getProjects(getComponentInfo = false) {
-    const registryRoot = this.getRegistryRoot();
-    const files = await fs.readdir(registryRoot);
+    const componentsRoot = this.getComponentsRoot();
+    const files = await fs.readdir(componentsRoot);
 
     const dirPromises = files.map(async file => {
       if (await this.projectIsExist(file)) {
@@ -60,7 +60,7 @@ class ProjectsService extends Service {
    */
   async getComponents({ projectName }) {
     if (await this.projectIsExist(projectName)) {
-      const components = await fs.readdir(path.join(this.getRegistryRoot(), projectName, 'meta'));
+      const components = await fs.readdir(path.join(this.getComponentsRoot(), projectName, 'meta'));
       return components.map(components => components.split('.')[0]) || [];
     }
     return null;

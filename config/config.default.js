@@ -58,7 +58,7 @@ module.exports = appInfo => {
 
   // add your user config here
   const userConfig = {
-    registryRoot: 'E:/nginx/html',
+    componentsRoot: 'E:/nginx/html',
   };
 
   return {

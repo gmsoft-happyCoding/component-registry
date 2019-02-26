@@ -38,7 +38,7 @@ body {
   display: grid;
   padding: 50px 30px;
   margin: 0 auto;
-  min-height: 750px;
+  min-height: 700px;
   grid-column-gap: 15px;
   grid-row-gap: 20px;
   grid-template-columns: repeat(auto-fill, 300px);

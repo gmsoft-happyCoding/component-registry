@@ -6,6 +6,7 @@ module.exports = {
   // static: {
   //   enable: true,
   // }
+
   nunjucks: {
     enable: true,
     package: 'egg-view-nunjucks',
@@ -17,10 +18,6 @@ module.exports = {
   swaggerdoc: {
     enable: true,
     package: 'egg-swagger-doc',
-  },
-  cors: {
-    enable: true,
-    package: 'egg-cors',
   },
   alinode: {
     enable: true,

@@ -29,9 +29,14 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1550733099928_9764';
 
   // add your middleware config here
-  config.middleware = ['errorHandler'];
+  config.middleware = ['cors', 'errorHandler'];
   // 只对 /api 前缀的 url 路径生效
   config.errorHandler = { match: '/api' };
+  // 跨域请求
+  config.cors = {
+    // 允许携带cookie
+    credentials: true,
+  };
 
   config.swaggerdoc = {
     dirScanner: './app/controller',

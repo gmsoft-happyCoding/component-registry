@@ -18,6 +18,10 @@ module.exports = {
     enable: true,
     package: 'egg-swagger-doc',
   },
+  cors: {
+    enable: true,
+    package: 'egg-cors',
+  },
   alinode: {
     enable: true,
     package: 'egg-alinode',

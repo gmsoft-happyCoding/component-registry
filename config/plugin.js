@@ -20,7 +20,7 @@ module.exports = {
     package: 'egg-swagger-doc',
   },
   alinode: {
-    enable: true,
+    enable: process.env.NODE_ENV !== 'development',
     package: 'egg-alinode',
   },
 };

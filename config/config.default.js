@@ -63,6 +63,7 @@ module.exports = appInfo => {
 
   // add your user config here
   const userConfig = {
+    serverName: 'registry.gmsofttest.com',
     componentsRoot: '/opt/components',
   };
 

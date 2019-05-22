@@ -57,14 +57,14 @@ module.exports = appInfo => {
 
   config.alinode = {
     // 从 `Node.js 性能平台` 获取对应的接入参数
-    appid: '78520',
-    secret: '',
+    appid: '@appid@',
+    secret: '@secret@',
   };
 
   // add your user config here
   const userConfig = {
-    serverName: 'registry.gmsofttest.com',
-    componentsRoot: '/opt/components',
+    serverName: '@serverName@',
+    componentsRoot: '@componentsRoot@',
   };
 
   return {

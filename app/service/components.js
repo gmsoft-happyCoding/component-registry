@@ -35,10 +35,13 @@ class ProjectsService extends Service {
       // 组件文件所在目录
       const dir = path.join(this.getComponentsRoot(), projectName, 'static', 'js');
       const files = await fs.readdir(dir);
-      const components = filter(
-        files,
-        file => file.startsWith(componentName) && path.extname(file) === '.js'
-      );
+      const components = filter(files, file => {
+        const fileInfo = path.parse(file);
+        return (
+          fileInfo.name && fileInfo.name.split('.')[0] === componentName && fileInfo.ext === '.js'
+        );
+      });
+
       // 没有找到组件
       if (components.length === 0) return null;
       // 找到一个组件

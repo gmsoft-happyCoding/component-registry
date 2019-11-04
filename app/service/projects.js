@@ -11,7 +11,9 @@ const componentName = fileName => fileName.split('.')[0];
 // 过滤工作流UI组件
 const workflowFilter = (componentsRoot, projectName, workflow) => componentFile => {
   const meta = fsExtra.readJsonSync(path.join(componentsRoot, projectName, 'meta', componentFile));
-  return meta.workflowFlag === JSON.parse(workflow);
+  return JSON.parse(workflow)
+    ? meta.workflowFlag === true
+    : meta.workflowFlag === false || meta.workflowFlag === undefined;
 };
 
 class ProjectsService extends Service {

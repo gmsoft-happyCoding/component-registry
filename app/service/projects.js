@@ -1,8 +1,18 @@
 'use strict';
 
 const fs = require('mz/fs');
+const fsExtra = require('fs-extra');
 const path = require('path');
 const { Service } = require('egg');
+
+// 获取组件名称
+const componentName = fileName => fileName.split('.')[0];
+
+// 过滤工作流UI组件
+const workflowFilter = (componentsRoot, projectName, workflow) => componentFile => {
+  const meta = fsExtra.readJsonSync(path.join(componentsRoot, projectName, 'meta', componentFile));
+  return meta.workflowFlag === JSON.parse(workflow);
+};
 
 class ProjectsService extends Service {
   /**
@@ -57,11 +67,23 @@ class ProjectsService extends Service {
 
    * @param {Object} args - args
    * @param {string} args.projectName - 项目名称
+   * @param {boolean} args.workflow - 过滤工作UI流组件
    */
-  async getComponents({ projectName }) {
+  async getComponents({ projectName, workflow }) {
     if (await this.projectIsExist(projectName)) {
       const components = await fs.readdir(path.join(this.getComponentsRoot(), projectName, 'meta'));
-      return components.map(components => components.split('.')[0]) || [];
+
+      if (!components) return [];
+
+      // 不需要过滤 workflow
+      if (workflow === undefined) {
+        return components.map(componentName);
+      }
+
+      // 过滤 workflow
+      return components
+        .filter(workflowFilter(this.getComponentsRoot(), projectName, workflow))
+        .map(componentName);
     }
     return null;
   }

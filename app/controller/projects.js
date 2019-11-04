@@ -22,13 +22,14 @@ class ProjectsController extends Controller {
    * @summary 获取项目的组件列表
    * @Router get /projects/{projectName}/components
    * @Request path string projectName 项目名称
+   * @Request query boolean workflow 过滤工作UI流组件
    * @Response 200 componentsResponse ok
    * @Response 404 errorResponse 错误信息 {res: 错误代码, msg: 错误信息}
    */
   async components() {
     const { ctx } = this;
     ctx.validate({ projectName: 'string' }, ctx.params);
-    const components = await ctx.service.projects.getComponents(ctx.params);
+    const components = await ctx.service.projects.getComponents({ ...ctx.params, ...ctx.query });
     if (components) ctx.body = { components };
     else ctx.throw(404, 'project does not exist', { code: error_code.PROJECT_NOT_EXIST });
   }

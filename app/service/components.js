@@ -21,7 +21,9 @@ class ProjectsService extends Service {
    * @return {string} - 组件url
    */
   buildComponentUrl(projectName, componentFile) {
-    return `//${this.ctx.app.config.serverName}/${projectName}/static/js/${componentFile}`;
+    const { origin } = this.ctx.request;
+    const server = origin.endsWith(':80') ? origin.slice(0, -3) : origin;
+    return `${server}/${projectName}/static/js/${componentFile}`;
   }
 
   /**
@@ -50,8 +52,8 @@ class ProjectsService extends Service {
       // 如果找到多个组件(版本), 按照时间排倒序
       const orderedComponents = orderBy(
         components,
-        [ component => fs.statSync(path.join(dir, component)).mtimeMs ],
-        [ 'desc' ]
+        [component => fs.statSync(path.join(dir, component)).mtimeMs],
+        ['desc']
       );
 
       return this.buildComponentUrl(projectName, orderedComponents[0]);

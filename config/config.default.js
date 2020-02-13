@@ -25,6 +25,9 @@ module.exports = appInfo => {
     },
   };
 
+  config.proxy = true;
+  config.hostHeaders = 'X-Forwarded-Host';
+
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_1550733099928_9764';
 
@@ -63,7 +66,6 @@ module.exports = appInfo => {
 
   // add your user config here
   const userConfig = {
-    serverName: '@serverName@',
     componentsRoot: '@componentsRoot@',
   };
 

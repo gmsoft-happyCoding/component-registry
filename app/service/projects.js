@@ -73,7 +73,13 @@ class ProjectsService extends Service {
    */
   async getComponents({ projectName, workflow }) {
     if (await this.projectIsExist(projectName)) {
-      const components = await fs.readdir(path.join(this.getComponentsRoot(), projectName, 'meta'));
+      const metaPath = path.join(this.getComponentsRoot(), projectName, 'meta');
+
+      const pathExists = await fsExtra.pathExists(metaPath);
+
+      if (!pathExists) return [];
+
+      const components = await fs.readdir(metaPath);
 
       if (!components) return [];
 

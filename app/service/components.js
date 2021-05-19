@@ -22,7 +22,8 @@ class ProjectsService extends Service {
    */
   buildComponentUrl(projectName, componentFile) {
     const { origin } = this.ctx.request;
-    const server = origin.endsWith(':80') ? origin.slice(0, -3) : origin;
+
+    const server = origin && origin.replace(/:(80|443)/, '');
     return `${server}/${projectName}/static/js/${componentFile}`;
   }
 

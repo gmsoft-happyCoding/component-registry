@@ -99,12 +99,16 @@ yarn stop
 ##### nginx 配置
 ```
 server {
-    listen 80;
-    listen 443 ssl http2;
-    server_name  registry.demo.com;
+   listen 80;
+   listen 443 ssl http2;
+   server_name  registry.demo.com;
+
+   proxy_set_header X-Forwarded-For   $remote_addr;
+   proxy_set_header X-Forwarded-Proto $scheme;
+   proxy_set_header X-Forwarded-Host  $host:$server_port;
  
-    root /opt/components;
-    index index.html;
+   root /opt/components;
+   index index.html;
    access_log    /var/log/nginx/registry.gmsofttest.log main;
     
    location / {

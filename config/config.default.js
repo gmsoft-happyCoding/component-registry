@@ -1,6 +1,4 @@
 /* eslint-disable array-bracket-spacing */
-/* eslint valid-jsdoc: "off" */
-
 'use strict';
 
 /**
@@ -56,12 +54,6 @@ module.exports = appInfo => {
     // enableValidate: true,
     routerMap: false,
     enable: true,
-  };
-
-  config.alinode = {
-    // 从 `Node.js 性能平台` 获取对应的接入参数
-    appid: '@appid@',
-    secret: '@secret@',
   };
 
   // add your user config here

@@ -19,8 +19,4 @@ module.exports = {
     enable: true,
     package: 'egg-swagger-doc',
   },
-  alinode: {
-    enable: process.env.NODE_ENV !== 'development',
-    package: 'egg-alinode',
-  },
 };

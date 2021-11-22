@@ -52,30 +52,6 @@ cd component-registry
 yarn
 ```
 
-
-##### 安装AliNode Runtime
-```
-# 如果 nodeinstall 已经全局安装过, 可跳过
-npm i nodeinstall -g
-
-# 在项目中安装 alinode
-# 注意:不支持windows, alinode没有windows版本
-nodeinstall --install-alinode ^3
-```
-
-
-##### 注册阿里云性能平台(免费), 用于应用的监控报警
-```
-https://www.aliyun.com/product/nodejs
-
-# component-registry\config\config.default.js
-config.alinode = {
-   // 从 `Node.js 性能平台` 获取对应的接入参数
-   appid: '@appid@',
-   secret: '@secret@',
-};
-```
-
 ##### 修改参数 componentsRoot, 设置为 components 发布的根目录, 例如: /opt/components
 ```
 # component-registry\config\config.default.js
@@ -83,7 +59,6 @@ const userConfig = {
    componentsRoot: '@componentsRoot@'
 };
 ```
-
 
 ##### 启动服务器
 ```
